@@ -1842,7 +1842,10 @@ async function submitActiveFile(): Promise<void> {
     index: cf.index,
     code,
     language: lang,
-    fileName: path.basename(source),
+    fileName:
+      lang === "java" && isCsesPlatform(meta.platform)
+        ? "Main.java"
+        : path.basename(source),
     submitUrl,
     expiresAt: Date.now() + 120_000
   };
